@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\productcategories;
 use App\Http\Requests\StoreproductcategoriesRequest;
 use App\Http\Requests\UpdateproductcategoriesRequest;
+use App\Models\Productcategories;
+use App\Models\Products;
 
 class ProductcategoriesController extends Controller
 {
@@ -15,17 +16,19 @@ class ProductcategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $data = Productcategories::get();
+        return view('pages.productcategories.list', ['data' => $data]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
+     * major to procat
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $procat =new Productcategories();
+        return view('pages.productcategories.form', ['data' => $procat]);
     }
 
     /**
@@ -36,7 +39,9 @@ class ProductcategoriesController extends Controller
      */
     public function store(StoreproductcategoriesRequest $request)
     {
-        //
+        $data =$request->all();
+        Productcategories::create($data);
+        return redirect('productcategories');
     }
 
     /**
@@ -45,9 +50,10 @@ class ProductcategoriesController extends Controller
      * @param  \App\Models\productcategories  $productcategories
      * @return \Illuminate\Http\Response
      */
-    public function show(productcategories $productcategories)
+    public function show(productcategories $productcategory)
     {
-        //
+        $productcategories = $productcategory->load(['products']);
+        return view('pages.productcategories.list-category',compact('productcategories'));
     }
 
     /**
@@ -56,9 +62,11 @@ class ProductcategoriesController extends Controller
      * @param  \App\Models\productcategories  $productcategories
      * @return \Illuminate\Http\Response
      */
-    public function edit(productcategories $productcategories)
+    public function edit(Productcategories $productcategory)
     {
-        //
+        return view('pages.productcategories.form',[
+            'data' => $productcategory
+        ]);
     }
 
     /**
@@ -68,9 +76,11 @@ class ProductcategoriesController extends Controller
      * @param  \App\Models\productcategories  $productcategories
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateproductcategoriesRequest $request, productcategories $productcategories)
+    public function update(UpdateproductcategoriesRequest $request, Productcategories $productcategory)
     {
-        //
+        $data = $request->all();
+        $productcategory ->update($data);
+        return redirect()->route('productcategories.index');
     }
 
     /**
@@ -79,8 +89,9 @@ class ProductcategoriesController extends Controller
      * @param  \App\Models\productcategories  $productcategories
      * @return \Illuminate\Http\Response
      */
-    public function destroy(productcategories $productcategories)
+    public function destroy(productcategories $productcategory)
     {
-        //
+        $productcategory->destroy($productcategory->id);
+        return redirect()->route('productcategories.index')->with('notif', 'berhasil delete');
     }
 }

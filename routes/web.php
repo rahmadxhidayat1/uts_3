@@ -1,6 +1,8 @@
 <?php
-
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProductcategoriesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Testcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+////utana
+Route::get('/',[Testcontroller::class, 'index'])->name('home');
+////
+route::resource('productcategories', ProductcategoriesController::class);
+route::resource('products', ProductsController::class);
