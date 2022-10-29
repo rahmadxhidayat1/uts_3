@@ -50,8 +50,8 @@
                     <h5><span class="badge bg-danger opacity-50">{{ $listed->status }}</span></h5>
                 @endif
             </td>
-            <td>{{ $listed->price }}</td>
-            <td>{{ $listed->weight }}</td>
+            <td>Rp{{ $listed->price }}</td>
+            <td>{{ $listed->weight }} kg</td>
             {{-- ditambahkan name karna untuk memanggil name dari table major yang sebabnya sudah ada belongsto --}}
             <td>{{ $listed->productcategories->name }}</td>
             <td><img src="/storage/{{ $listed->image }}" class="img-thumbnail" width="200px" height="200px"></td>

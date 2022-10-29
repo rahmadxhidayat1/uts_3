@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content2')
-    <h3>Jurusan {{$productcategories->name}}</h3>
-    <p>Jumlah siswa {{$productcategories->products->count()}}</p>
+    <h3>{{$productcategories->name}}</h3>
+    <p>Barang ada {{$productcategories->products->count()}}</p>
     <table class="table table-borderless table-dark">
         <thead>
             <tr>

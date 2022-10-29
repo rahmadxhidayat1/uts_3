@@ -41,7 +41,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Weight</label>
+            <label for="exampleInputEmail1" class="form-label">Weight (kg)</label>
             <input type="text" class="form-control" name="weight" value="{{$data->weight}}" id="exampleInputEmail1" >
             @error('weight') <div class="text-muted"><p class="text-white" style="text-decoration: underline">{{$message}}</p></div>
             @enderror
